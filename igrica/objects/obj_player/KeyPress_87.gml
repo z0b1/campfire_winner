@@ -1,16 +1,21 @@
-/// @DnDAction : YoYo Games.Mouse & Keyboard.If_Key_Pressed
-/// @DnDVersion : 1
-/// @DnDHash : 6C4072FE
-/// @DnDArgument : "key" "ord("W")"
-var l6C4072FE_0;
-l6C4072FE_0 = keyboard_check_pressed(ord("W"));
-if (l6C4072FE_0)
+move_speed = 1;
+tilemap = layer_tilemap_get_id("Tiles_Col");
+var _hor = keyboard_check(ord("D")) - keyboard_check(ord("A"));
+var _ver = keyboard_check(ord("S")) - keyboard_check(ord("W"));
+
+move_and_collide(_hor * move_speed, _ver * move_speed, tilemap);
+
+if (_hor != 0 or _ver != 0)
 {
-	/// @DnDAction : YoYo Games.Movement.Add_Motion
-	/// @DnDVersion : 1
-	/// @DnDHash : 3324FB38
-	/// @DnDParent : 6C4072FE
-	/// @DnDArgument : "dir" "image_angle"
-	/// @DnDArgument : "speed" "1"
-	motion_add(image_angle, 1);
+    if (_ver > 0) sprite_index = spr_player_walk_down;
+    else if (_ver < 0) sprite_index = spr_player_walk_up;
+    else if (_hor > 0) sprite_index = spr_player_walk_right;
+    else if (_hor < 0) sprite_index = spr_player_walk_left;
+}
+else
+{
+    if (sprite_index == spr_player_walk_right) sprite_index = spr_player_idle_right;
+    else if (sprite_index == spr_player_walk_left) sprite_index = spr_player_idle_left;
+    else if (sprite_index == spr_player_walk_up) sprite_index = spr_player_idle_up;
+    else if (sprite_index == spr_player_walk_down) sprite_index = spr_player_idle_down;
 }
