@@ -1,2 +1,8 @@
 igra pocinje tako sto igrac pada do nekog bedrocka
 odatle imaju nivoi i po svakom nivou special ability
+ability:
+1. dash
+2. shield
+3. freeze
+i stalan ability za flashlight
+endpoint bude paljenje campfirea
