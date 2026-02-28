@@ -1,0 +1,2 @@
+igra pocinje tako sto igrac pada do nekog bedrocka
+odatle imaju nivoi i po svakom nivou special ability
