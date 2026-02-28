@@ -1,0 +1,12 @@
+{
+  "$GMNotes":"v1",
+  "%Name":"ReadMe",
+  "name":"ReadMe",
+  "openedOnFirstLoad":true,
+  "parent":{
+    "name":"igrica",
+    "path":"igrica.yyp",
+  },
+  "resourceType":"GMNotes",
+  "resourceVersion":"2.0",
+}
