@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 move_speed = 1;
 tilemap = layer_tilemap_get_id("Tiles_Col");
 var _hor = keyboard_check(ord("D")) - keyboard_check(ord("A"));
@@ -21,4 +20,4 @@ else
     else if (sprite_index == spr_player_walk_up) sprite_index = spr_player_idle_up;
     else if (sprite_index == spr_player_walk_down) sprite_index = spr_player_idle_down;
 }
->>>>>>> 006c60b13db7ee299dd6be69701af2cf9265129d
+
