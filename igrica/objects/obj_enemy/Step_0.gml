@@ -1,19 +1,9 @@
-// 1. Follow the player
-if (instance_exists(obj_player)) {
-    var _dir = point_direction(x, y, obj_player.x, obj_player.y);
-    var _spd = 0.5; // Slower than player
-    
-    // Move towards player if they are within 200 pixels
-    if (point_distance(x, y, obj_player.x, obj_player.y) < 200) {
-        x += lengthdir_x(_spd, _dir);
-        y += lengthdir_y(_spd, _dir);
-    }
-}
+var _target_x = obj_player.x;
+var _target_y = obj_player.y;
+var _spd = 0.5;
+var _tilemap = layer_tilemap_get_id("Tiles_Col");
 
-// 2. Attack Logic (Collision)
-if (place_meeting(x, y, obj_player)) {
-    // This triggers the "hit" logic on the player
-    with(obj_player) {
-        event_user(0); // Trigger a custom event for getting hit
-    }
-}
+// Move toward player but stop at Tiles_Col borders
+var _dir_x = sign(_target_x - x);
+var _dir_y = sign(_target_y - y);
+move_and_collide(_dir_x * _spd, _dir_y * _spd, _tilemap);

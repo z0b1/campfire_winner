@@ -1,12 +1,34 @@
-// --- 1. SETUP ---
-move_speed = 1;
-tilemap = layer_tilemap_get_id("Tiles_Col");
+// --- 1. Inputs & Movement ---
 var _hor = keyboard_check(ord("D")) - keyboard_check(ord("A"));
 var _ver = keyboard_check(ord("S")) - keyboard_check(ord("W"));
 
-// --- 2. TIMER LOGIC ---
-if (hit_timer > 0) hit_timer -= 1;
-else hit_count = 0;
+if (_hor != 0) last_dir_x = _hor; // Remember which way we face
+
+if (_hor != 0 || _ver != 0) {
+    move_and_collide(_hor * move_speed, _ver * move_speed, tilemap, 4, 0, 0, 1, 1);
+}
+
+// --- 2. ATTACK LOGIC (Place the code here!) ---
+if (mouse_check_button_pressed(mb_left)) {
+    // Create the hit zone in front of the player
+    var _hit_x = x + (last_dir_x * 40);
+    var _inst = collision_rectangle(_hit_x - 20, y - 20, _hit_x + 20, y + 20, obj_enemy, false, true);
+    
+    // THIS IS THE BLOCK YOU ASKED ABOUT:
+    if (_inst != noone) {
+        // 1. Destroy the enemy
+        instance_destroy(_inst);
+        
+        // 2. Play the sound (Make sure snd_hit is the name in your assets!)
+        audio_play_sound(snd_hit, 1, false);
+        
+        // 3. Update stats
+        hit_count += 1; 
+        
+        show_debug_message("Hit! Enemy gone and sound played.");
+    }
+}
+
 
 // --- 3. MOVEMENT (Anti-Stuck Version) ---
 if (_hor != 0 || _ver != 0) {
